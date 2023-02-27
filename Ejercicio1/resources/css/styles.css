@@ -1,0 +1,74 @@
+html,body{
+    height: 100%;
+}
+body{
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    line-height: 1.2em;
+}
+.header{
+    position: relative;
+    top:0;
+    width: 100%;
+    min-height: 75px;
+    margin: 0;
+    padding: 0;
+    /*border-bottom: 1px solid rgb(19, 0, 54);*/
+}
+.header .titulo{
+    display: inline-block;
+    padding: 0;
+}
+.header .titulo > h1{
+    margin: 15px 0 0;
+}
+.header > nav{
+    margin: 15px;
+}
+.header > nav ul li{
+    display: inline;
+    list-style-type: none;
+}
+.menu a{
+    text-decoration: none;
+    color:rgb(88, 88, 90);
+}
+.logo{
+    display: block;
+    float: right;
+    margin-right: 50px;
+}
+.logo > img{
+    max-width: 75px;
+    min-width: 75px;
+}
+.ficha{
+    border: 1px solid black;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 1px 1px 3px rgb(156, 150, 150);
+    background-color: rgb(247, 244, 244);
+}
+.ficha > img{
+    max-width: 300px;
+    max-height: 200px;
+    border-radius: 8px;
+    margin-left: 40px;
+}
+.ficha > .datos{
+    padding: 5px 20px;
+    color:blue;
+    margin-top: 0;
+}
+.content{
+    width: 80%;
+    margin: 20px auto;
+}
+.grid-container{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    grid-gap:20px;
+    padding: 5px;
+}

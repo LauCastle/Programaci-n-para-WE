@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "tipo": "suv",
+        "foto": "logO.jpg",
+        "marca": "Ford",
+        "modelo": "Figo",
+        "anio": "2016",
+        "motor": {
+            "potencia": "100 HP",
+            "desplazamiento": "1.4 l",
+            "kilometraje": "100 mil"
+        }
+    },
+    {
+        "id": 2,
+        "tipo": "suv",
+        "foto": "logO.jpg",
+        "marca": "Ford",
+        "modelo": "Figo",
+        "anio": "2016",
+        "motor": {
+            "potencia": "100 HP",
+            "desplazamiento": "1.4 l",
+            "kilometraje": "100 mil"
+        }
+    }
+]
