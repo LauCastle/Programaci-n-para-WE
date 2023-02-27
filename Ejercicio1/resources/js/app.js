@@ -1,6 +1,6 @@
 const app={
     
-    urlDatos:"/resources/data/datos.json",
+    urlDatos:"./resources/data/datos.json",
     filtro: "todos",
 
     cargarFichas: function(){
@@ -36,7 +36,7 @@ const app={
 window.onload = function(){
     app.cargarFichas();
 
-    const mitem = documente.querySelectorAll("a.mitem");
+    const mitem = document.querySelectorAll("a.mitem");
 
     mitem.forEach(menuItem => {
         menuItem.addEventListener("click", event => {
