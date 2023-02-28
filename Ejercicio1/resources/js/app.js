@@ -16,8 +16,13 @@ const app={
                                 <img src="./resources/img/${auto.foto}" alt="${ auto.marca }">
                                 <div class="datos">
                                     <h3>${auto.marca}</h3>
+                                    <button class="btn">Leer más</button>
+                                    <br>
+                                    
                                     <span>${auto.modelo}</span>
                                     <span>${auto.anio}</span>
+                                    <br>
+                                    <span>${auto.precio}</span>
                                     <br>
                                     <small> ${auto.motor.potencia},
                                             ${auto.motor.kilometraje}, 
