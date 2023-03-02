@@ -7,6 +7,7 @@
     <div class="col-8">
         <div id="content" class="content">
             <!--Publicaciones-->
+            
         </div>
     </div>
     <div class="col-4">
