@@ -3,21 +3,33 @@ const app = {
 	urlComments : "https://jsonplaceholder.typicode.com/comments",
 	urlUsers : "https://jsonplaceholder.typicode.com/users",
 
-	cargarPost : function(){
+	userId: "",
+
+	cargarPost : async function(){
 		//const cont = document.querySelector("#content");
 		const cont = $("#content");
 		cont.css("width", "100%");
 		cont.addClass("mx-auto mt-5")
 		let html = "";
-		fetch(this.urlPost)
+		let urlaux = "";
+		if (this.userId !== ""){
+			urlaux = "?userId=" + this.userId;
+		}
+		let r = await  fetch(this.urlUsers + "/" + this.userId)
+					.then(resp => resp.json())
+					.catch(err => console.error(err));
+		console.log(r);
+		fetch(this.urlPost + urlaux)
 			 .then(resp => resp.json())
 			 .then(posts => {
 			 	for(let post of posts){
-			 		//let autor
+					console.log(r.name);
+			 		let autor = ( typeof r[post.userId-1] !== "undefined" ? r[post.userId].name : r.name);
 			 		html += `
 			 			<div class="card mb-3">
 			              <div class="card-header">
-			                ${post.title}
+			                <h5 class="card-tittle">${post.title}</h5>
+							<h6 class="card-subtitle mb-2">${autor} | Fecha</h6>
 			              </div>
 			              <div class="card-body">
 			                <p class="card-text">${post.body}</p>
@@ -85,6 +97,16 @@ const app = {
 			 	}
 			 	users.html(html);
 			 }).catch(err => console.error(error));
+	},
+
+	userPost : function(userId){
+		$("#up" + this.userId).removeClass("active");
+		this.userId = userId;
+		$("#up" + userId).addClass("active");
+		this.cargarPosts();
+	},
+	buscarPalabra : function(){
+		
 	}
 }
 
