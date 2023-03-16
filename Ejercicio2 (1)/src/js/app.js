@@ -4,6 +4,7 @@ const app = {
 	urlUsers : "https://jsonplaceholder.typicode.com/users",
 
 	userId: "",
+	palabraClave: "",
 
 	cargarPost : async function(){
 		//const cont = document.querySelector("#content");
@@ -24,12 +25,13 @@ const app = {
 			 .then(posts => {
 			 	for(let post of posts){
 					console.log(r.name);
-			 		let autor = ( typeof r[post.userId-1] !== "undefined" ? r[post.userId].name : r.name);
-			 		html += `
+			 		let autor = typeof r[post.userId-1] !== "undefined" ? r[post.userId].name : r.name;
+			 		if(post.body.indexOf(this.palabraClave) !==-1){
+					html += `
 			 			<div class="card mb-3">
 			              <div class="card-header">
 			                <h5 class="card-tittle">${post.title}</h5>
-							<h6 class="card-subtitle mb-2">${autor} | Fecha</h6>
+							<h6 class="card-subtitle mb-2"><i class="bi bi-person-fill">${autor}</i> | <i class="bi bi-calendar-week"></i></h6>
 			              </div>
 			              <div class="card-body">
 			                <p class="card-text">${post.body}</p>
@@ -49,6 +51,7 @@ const app = {
 			              </div>
 			            </div>
 			 		`;
+					}
 			 		//cont.innerHTML = html;
 			 		cont.html(html);
 			 	}
@@ -91,7 +94,8 @@ const app = {
 			 .then(usuarios => {
 			 	for(let u of usuarios){
 			 		html +=`
-				    <button type="button" class="list-group-item list-group-item-action" aria-current="true" id="up${u.id}" onclick="app.userPost(${u.id})">
+				    <button type="button" class="list-group-item list-group-item-action" aria-current="true" id="up${u.id}" 
+						onclick="app.userPost(${u.id})">
 		                ${u.name}<br><small>${u.email}</small>
 		              </button>`;
 			 	}
@@ -103,10 +107,13 @@ const app = {
 		$("#up" + this.userId).removeClass("active");
 		this.userId = userId;
 		$("#up" + userId).addClass("active");
-		this.cargarPosts();
+		this.cargarPost();
 	},
 	buscarPalabra : function(){
-		
+		$("#up" + this.userId).removeClass("active");
+		this.userId = "";
+		this.palabraClave = $("#buscar-palabra").val();
+		this.cargarPost
 	}
 }
 
