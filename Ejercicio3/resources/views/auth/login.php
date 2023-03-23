@@ -1,8 +1,8 @@
 <?php
     namespace views;
-    require "/app/autoloader.php";
+    require "../../../app/autoloader.php";
     include "../layouts/main.php";
-    //use Controllers\auth\LoginController as LoginController;
+    use Controllers\auth\LoginController as LoginController;
     head();
 ?>
 <div class="container">
