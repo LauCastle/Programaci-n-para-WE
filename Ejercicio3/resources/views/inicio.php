@@ -22,5 +22,6 @@
     </div>
 </div>
  <?php 
+    scripts();
  	foot();
   ?>

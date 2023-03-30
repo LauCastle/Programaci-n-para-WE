@@ -13,3 +13,12 @@
             print_r($userLogin->userAuth($datos));
         }
     }
+    if(!empty($_GET)){
+        //******LOGOUT */
+        $logout = in_array('_logout', array_keys(filter_input_array(INPUT_GET)));
+        if($logout){
+            $userLogout = new LoginController();
+            $userLogout->logout();
+            header('Location: /resources/views/home.php');
+        }
+    }

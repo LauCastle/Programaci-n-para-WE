@@ -21,7 +21,28 @@
                 //return con algo aqui
             }else{
                 //destruir toda sección existente
-                echo json_encode(["r"=>false]);
+                echo json_encode(["r"=> false]);
+            }
+        }
+        
+        public function sessionValidate(){
+            $user = new user();
+            session_start();
+            if(session_status() == PHP_SESSION_ACTIVE && count($_SESSION) > 0){
+                $datos = $_SESSION;
+                $result = $user->where([["username",$datos["username"]],
+                                        ["passwd",$datos["passwd"]]])->get();
+                if(count(json_decode($result))> 0 && $datos['IP'] == $_SERVER['REMOTE_ADDR']){
+                    session_write_close();
+                    $this->sv = true;
+                    $this->name = json_decode($result)[0]->name;
+                    $this->id = json_decode($result)[0]->id;
+                    return $result;
+                }else{
+                    session_write_close();
+                    $this->sessionDestroy();
+                    return null;
+                }
             }
         }
 
@@ -44,6 +65,11 @@
             $this->name = "";
             $this->id = "";
 
+            return false;
+        }
+
+        public function logout(){
+            $this->sessionDestroy();
             return;
         }
     }
