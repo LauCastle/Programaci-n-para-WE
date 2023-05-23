@@ -18,6 +18,7 @@
             <thead>
                 <th>Título</th>
                 <th>Fecha</th>
+                <th>Actualizado</th>
                 <th><i class="bi bi-gear"></i></th>
             </thead>
             <tbody id="my-posts">

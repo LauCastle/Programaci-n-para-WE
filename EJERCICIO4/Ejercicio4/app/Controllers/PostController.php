@@ -42,7 +42,7 @@
 
         public function newPost($datos){
             $post = new posts();
-            $post->valores = [null,$datos['uid'],$datos['title'],$datos['body']];
+            $post->valores = [null,$datos['uid'],$datos['title'],$datos['body'], null];
             $result = $post->create();
             return;
             die;
@@ -78,7 +78,9 @@
         public function guardarCamb($datos) {
            date_default_timezone_set('America/Mexico_City');
            $camb = new posts();
-           $camb-> valores = [$datos]
+           $camb-> valores = [$datos['pid'], $this->userId, $datos['title'], $datos['body'], date('Y-m-d H:i:s')];
+           $result = $camb->where([['id', $datos['pid']]])->update();
+           return $resutl;
         }
 
     }

@@ -121,5 +121,19 @@ class DB {
                " where " . $this->w;
         return $this->table->query($sql);
     }
+
+    public function update(){
+        $tim = "";
+        for($i = 0; $i < count($this->campos); $i++){
+            $tim .= $this->campos[$i] . ' = ?, ';
+        }
+        $tim = trim($tim, ", ");
+        $sql = "update " . str_replace("Models\\","",get_class($this)) .
+               " set " . $tim .
+               " where " . $this->w;
+        $stmt = $this->table->prepare($sql);
+        $stmt->bind_param(str_pad("",count($this->campos),"s"),...$this->valores);
+        return $stmt->execute();
+    }
         
 }

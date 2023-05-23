@@ -37,16 +37,16 @@ if(!empty($_POST)){
     $sc = in_array('_sc',array_keys(filter_input_array(INPUT_POST)));
     if($sc){
         $datos = filter_input_array(INPUT_POST,FILTER_SANITIZE_SPECIAL_CHARS);
-        $cambio = new PostController();
-        print_r($cambio->guardarCamb($datos));
+        $comments = new PostController();
+        print_r($comments->saveComment($datos));
     }
 
-    //**** Para guardar los nuevos comentarios */
+    //**** Para guardar los nuevos cambios a las publicaciones */
     $gc = in_array('_gc',array_keys(filter_input_array(INPUT_POST)));
     if($gc){
         $datos = filter_input_array(INPUT_POST,FILTER_SANITIZE_SPECIAL_CHARS);
-        $comment = new PostController();
-        print_r($comment->saveComment($datos));
+        $cambio = new PostController();
+        print_r($cambio->guardarCamb($datos));
     }
 }
 if(!empty($_GET)){

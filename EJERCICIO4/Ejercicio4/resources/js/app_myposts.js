@@ -16,6 +16,7 @@ const app_myposts = {
                         html += `<tr>
                                     <td>${ post.title }</td>
                                     <td>${ post.created_at }</td>
+                                    <td>${ post.updated_at != null ? post.updated_at : "Sin editar" }</td>
                                     <td>
                                         <a href="#" class="link-primary" data-bs-toggle="modal" data-bs-target="#modBody-${post.id}"><i class="bi bi-eye"></i></a>
                                         <a href="#" class="link-primary mx-2" data-bs-toggle="modal" data-bs-target="#modEd-${post.id}"><i class="bi bi-pencil-square"></i></a>
@@ -52,7 +53,7 @@ const app_myposts = {
                                                         <form>
                                                             <div class="mb-3">
                                                             <label for="recipient-name" class="col-form-label">Titulo:</label>
-                                                            <input type="text" class="form-control" id="postTitle-${ post.id }" value="${ post.id }">
+                                                            <input type="text" class="form-control" id="postTitle-${ post.id }" value="${ post.title }">
                                                             </div>
                                                             <div class="mb-3">
                                                             <label for="message-text" class="col-form-label">Nueva Información:</label>
