@@ -115,6 +115,14 @@ class DB {
         $stmt->bind_param(str_pad("",count($this->campos),"s"),...$this->valores);
         return $stmt->execute();
     }
+    
+    public function up($sets){
+        foreach( $sets as $s){
+            $set[] = $s[0] . "=" . $s[1];
+        }
+        #$sql = 'up ' . str_replace("Models\\","",get_class($this)) . 
+        #        ' set ' . implode(","$set) . ' where ' . 
+    }
 
     public function deletePost(){
         $sql = "delete from " . str_replace("Models\\","",get_class($this)) .

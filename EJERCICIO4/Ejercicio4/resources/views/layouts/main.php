@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app" class="container-fluid p-0">
-        <header class="row m-0 bg-light">
+        <header class="row m-0 bg-light bg-dark bg-gradient">
             <div class="col-9">
                 <a style="text-decoration: none; color: black;" href="/resources/views/home.php">
                     <h1 class="ml-3 mt-2">BLOG X</h1>

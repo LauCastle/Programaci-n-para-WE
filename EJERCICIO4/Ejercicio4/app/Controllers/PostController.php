@@ -60,6 +60,11 @@
             return $result;
         }
 
+        public function togglePostActive($pid){
+            $post = new posts();
+            $result = $post->where([['id',$pid]])->update([['active','not active']])
+        }
+
         public function deletePost($pid){
             $deletePost = new posts();
             $result = $deletePost->where([['id',$pid]])->deletePost();
@@ -73,6 +78,15 @@
             $u = json_decode($u);
             $comment->valores = [$datos['pid'], $u[0]->name, $u[0]->email, $datos['comment']];
             print_r($comment->create());
+        }
+
+        public function getPostComments($pid){
+            $comment = new comments();
+            $result = $comment->select(['name', 'comment'])
+                                ->where([['postId',$pid]])
+                                ->orderBy([['create_at','DESC']])
+                                ->get();
+            return $result;
         }
 
         public function guardarCamb($datos) {

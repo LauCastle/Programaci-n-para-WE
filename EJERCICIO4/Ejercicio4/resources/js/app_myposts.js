@@ -76,4 +76,12 @@ const app_myposts = {
                 this.mp.html(html);
             }).catch( err => console.error( err ));  
     },
+    togglePostActive : function(pid, uid){
+        fetch(this.url + "?_tpa&pid" + pid)
+            .then( resp=> {
+                if( resp.ok ){
+                    alert("Publicación actualizada correctamente");
+                }
+            }).catch( err => console.error( "Hay un error :",err))
+    }
 };

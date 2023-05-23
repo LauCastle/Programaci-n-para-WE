@@ -12,6 +12,7 @@ const app = {
         newpost : "/resources/views/autores/newpost.php",
         myposts : "/resources/views/autores/myposts.php",
         deletepost : "/app/app.php?_dp",
+        postcomments : "/app/app.php?_pm",
         savecomment : "/app/app.php",
         guardarCamb : "/app/app.php",
     },
@@ -119,7 +120,9 @@ const app = {
                     <i class="bi bi-hand-thumbs-up"></i> <span id="likes">${ 0 }</span>
                     <p class="float-end">
                         <span id="comentarios">
-                            <a href="#" onclick="btn btn-link btn-sm text-decoration-none disabled lin-secondary" rol="button">
+                            <a href="#" onclick="app.toggleComments(event,${ post[0].id }" 
+                                class="btn btn-link btn-sm text-decoration-none 
+                                    ${ post[1].tt > 0 ? '' : disabled } lin-secondary" rol="button">
                                 <i class="bi bi-chat-right-dots"></i> 
                                 ${ post[1].tt } comentarios
                             </a>
@@ -144,21 +147,44 @@ const app = {
             `;
     },
     toggleComments(e, pid, element){
-        e.preventDefault();
-        
+        if(e){
+            e.preventDefault();
+            $(element).toggleClass("d-done");
+        }else{
+            $(element).removeClass("d-done");
+        }
+        fetch(this.routes.postcomments + "&pid=" + pid)
+            .then(resp => resp.json() )
+            .then( comments => {
+                if( comments.length > 0){
+                    let html = "";
+                    for( let c of comments){
+                        html += ` 
+                            <li class="list-group-item">
+                                <p class="fw-bold mb-0">${ c.name }</p>
+                                <p> ${ c.comment }</p>
+                            </i> 
+                        `;
+                    }
+                    $(element).html(html);
+                }
+            }).catch( err => console.error("Hay un error: ", err ));
 
     },
     saveComment : function(pid){
-        const datos = new FormData();
-        datos.append('pid',pid);
-        datos.append("comment",$("#comment").val());
-        datos.append('_sc',"");
-        fetch(this.routes.savecomment,{
-            method:"POST",
-            body: datos
-        }).then( () => {
-            $("#comment").val("");
-        }).catch( err => console.error( "Hay un error: ", err));
+        if($("#comment").val() !== ""){
+            const datos = new FormData();
+            datos.append('pid',pid);
+            datos.append("comment",$("#comment").val());
+            datos.append('_sc',"");
+            fetch(this.routes.savecomment,{
+                method:"POST",
+                body: datos
+            }).then( () => {
+                $("#comment").val("");
+                this.toggleComments(null,pid,"#post-comments");
+            }).catch( err => console.error( "Hay un error: ", err));
+        }
     },
     guardarCamb : function(pid){
         const datos = new FormData();
