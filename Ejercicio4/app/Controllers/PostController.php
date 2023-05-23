@@ -62,7 +62,7 @@
 
         public function togglePostActive($pid){
             $post = new posts();
-            $result = $post->where([['id',$pid]])->update([['active','not active']])
+            $result = $post->where([['id',$pid]])->update([['active','not active']]);
         }
 
         public function deletePost($pid){
