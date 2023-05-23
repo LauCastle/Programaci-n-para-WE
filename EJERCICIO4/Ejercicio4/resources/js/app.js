@@ -118,7 +118,12 @@ const app = {
                     </p>
                     <i class="bi bi-hand-thumbs-up"></i> <span id="likes">${ 0 }</span>
                     <p class="float-end">
-                        <span id="comentarios"><i class="bi bi-chat-right-dots"></i> ${ post[1].tt } comentarios</span>
+                        <span id="comentarios">
+                            <a href="#" onclick="btn btn-link btn-sm text-decoration-none disabled lin-secondary" rol="button">
+                                <i class="bi bi-chat-right-dots"></i> 
+                                ${ post[1].tt } comentarios
+                            </a>
+                        </span>
                     </p>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" ${ this.user.sv ? '' : ' disabled readonly '} 
