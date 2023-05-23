@@ -103,7 +103,7 @@ if(!empty($_GET)){
     $pm = in_array('_pm',array_keys(filter_input_array(INPUT_GET)));
     if($pm){
         $pid = filter_input_array(INPUT_GET)["pid"];
-        $deletePost = new PostController();
+        $post = new PostController();
         print_r($post->getPostComments($pid));
     }
 

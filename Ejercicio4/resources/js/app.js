@@ -120,9 +120,9 @@ const app = {
                     <i class="bi bi-hand-thumbs-up"></i> <span id="likes">${ 0 }</span>
                     <p class="float-end">
                         <span id="comentarios">
-                            <a href="#" onclick="app.toggleComments(event,${ post[0].id }" 
+                            <a href="#" onclick="app.toggleComments(event,${ post[0].id }, '#post-comments')" 
                                 class="btn btn-link btn-sm text-decoration-none 
-                                    ${ post[1].tt > 0 ? '' : disabled } lin-secondary" rol="button">
+                                    ${ post[1].tt > 0 ? '' : disabled } link-secondary" rol="button">
                                 <i class="bi bi-chat-right-dots"></i> 
                                 ${ post[1].tt } comentarios
                             </a>

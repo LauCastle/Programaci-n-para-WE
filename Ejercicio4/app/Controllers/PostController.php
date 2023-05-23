@@ -84,7 +84,7 @@
             $comment = new comments();
             $result = $comment->select(['name', 'comment'])
                                 ->where([['postId',$pid]])
-                                ->orderBy([['create_at','DESC']])
+                                ->orderBy([['created_at','DESC']])
                                 ->get();
             return $result;
         }
