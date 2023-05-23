@@ -143,6 +143,11 @@ const app = {
                 </div>
             `;
     },
+    toggleComments(e, pid, element){
+        e.preventDefault();
+        
+
+    },
     saveComment : function(pid){
         const datos = new FormData();
         datos.append('pid',pid);
