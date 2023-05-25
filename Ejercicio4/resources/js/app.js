@@ -12,9 +12,11 @@ const app = {
         newpost : "/resources/views/autores/newpost.php",
         myposts : "/resources/views/autores/myposts.php",
         deletepost : "/app/app.php?_dp",
+        togglelike : "/app/app.php?_tl",
         postcomments : "/app/app.php?_pm",
         savecomment : "/app/app.php",
         guardarCamb : "/app/app.php",
+
     },
 
     user : {
@@ -117,7 +119,9 @@ const app = {
                     <p class="bm-1 border-bottom fs-3" style="text-align:justify;">
                         ${ post[0].body }
                     </p>
-                    <i class="bi bi-hand-thumbs-up"></i> <span id="likes">${ 0 }</span>
+                    <a href="#" class="btn btn-link btn-sm text-decoration-none ${ this.user.sv ? '' : ' disable '}" onclick="app.toggleLike(event,${ post[0].id},${ app.user.id})">
+                        <i class="bi bi-hand-thumbs-up"></i> <span id="likes">${ 0 }</span>
+                    </a>
                     <p class="float-end">
                         <span id="comentarios">
                             <a href="#" onclick="app.toggleComments(event,${ post[0].id }, '#post-comments')" 
@@ -146,30 +150,37 @@ const app = {
                 </div>
             `;
     },
-    toggleComments(e, pid, element){
+    toggleLike : function(e, uid, pid){
+        e.preventDefault();
+        fetch(this.routes.togglelike + "&uid=" + uid + "&pid=" + pid)
+            .then( response => response.json())
+            .then( likes => {
+                $("#likes").html(likes[0].tt);
+            }).catch( err => console.error("Hubo un error: ", err));
+    },
+    toggleComments : function(e, pid, element){
         if(e){
             e.preventDefault();
-            $(element).toggleClass("d-done");
+            $(element).toggleClass("d-none");
         }else{
-            $(element).removeClass("d-done");
+            $(element).removeClass("d-none");            
         }
         fetch(this.routes.postcomments + "&pid=" + pid)
-            .then(resp => resp.json() )
-            .then( comments => {
-                if( comments.length > 0){
+            .then(resp => resp.json())
+            .then(comments => {
+                if(comments.length > 0){
                     let html = "";
-                    for( let c of comments){
-                        html += ` 
-                            <li class="list-group-item">
-                                <p class="fw-bold mb-0">${ c.name }</p>
-                                <p> ${ c.comment }</p>
-                            </i> 
+                    for(let c of comments){
+                        html += `
+                                <li class="list-group-item">
+                                    <p class="fw-bold mb-0">${c.name}</p>
+                                    <p>${c.comment}</p>
+                                </li>
                         `;
                     }
                     $(element).html(html);
                 }
-            }).catch( err => console.error("Hay un error: ", err ));
-
+            }).catch(err => console.error("Hay un error: ", err));
     },
     saveComment : function(pid){
         if($("#comment").val() !== ""){

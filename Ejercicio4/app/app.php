@@ -92,6 +92,13 @@ if(!empty($_GET)){
         $post = new PostController();
         print_r($post->countPostComments($pid));
     }
+    //** */
+    $tl = in_array('_tl',array_keys(filter_input_array(INPUT_GET)));
+    if($tl){
+        $datos = filter_input_array(INPUT_GET);
+        $post = new PostController();
+        print_r(json_encode(['r' => $post->togglelike($datos['uid'],$datos['pid'])]));
+    }
     //**********************Borrar pubicaciones */
     $dp = in_array('_dp',array_keys(filter_input_array(INPUT_GET)));
     if($dp){

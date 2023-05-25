@@ -5,6 +5,7 @@
     use Models\posts;
     use Models\comments;
     use Models\user;
+    use Models\interactions;
     use Controllers\auth\LoginController as LoginController;
 
     class PostController {
@@ -97,4 +98,10 @@
            return $resutl;
         }
 
+        public function toggleLike($pid,$uid){
+            $like = new interactions();
+            $like->valors = [$uid,$pid,1];
+            $like->create();
+            
+        }
     }
